@@ -1,6 +1,6 @@
 from data import DataSeq
 
-Radix = 10
+Radixvar = 100
 
 def GetDigit(x, d):
     assert(d>0), "Error"
@@ -21,14 +21,14 @@ def RadixSortLSD(ds):
         tmp = CountDigits(ds.data[i])
         MaxCountDigits = tmp if MaxCountDigits < tmp else MaxCountDigits
 
-    Bucket = {i:[] for i in range(Radix)}
+    Bucket = {i:[] for i in range(Radixvar)}
     for i in range(ds.length):
         digit = GetDigit(ds.data[i], 1)
         Bucket[digit].append(ds.data[i])
 
     for d in range(2, MaxCountDigits+1):
-        NewBucket = {i:[] for i in range(Radix)}
-        for i in range(Radix):
+        NewBucket = {i:[] for i in range(Radixvar)}
+        for i in range(Radixvar):
             for x in Bucket[i]:
                 digit = GetDigit(x, d)
                 NewBucket[digit].append(x)
@@ -36,12 +36,12 @@ def RadixSortLSD(ds):
         Bucket = NewBucket
 
     idx = 0
-    for i in range(Radix):
+    for i in range(Radixvar):
         for x in Bucket[i]:
             ds.SetVal(idx, x)
             idx += 1
 
-RadixSort = RadixSortLSD
+Radix = RadixSortLSD
 
     
 if __name__ == "__main__":
